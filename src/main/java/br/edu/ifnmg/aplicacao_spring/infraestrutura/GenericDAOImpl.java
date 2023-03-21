@@ -60,11 +60,12 @@ public class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
     public boolean excluir(T entidade) {
         try {
             EntityManager manager = getManager();
+            entidade = manager.merge(entidade); // garante que a entidade passada como parâmetro seja reconectada ao contexto de persistência antes de ser removida
             manager.remove(entidade);
             manager.flush();
             return true;
         } catch (Exception e){
-            System.out.println("Não foi possivel excluir!");
+            System.out.println("Não foi possivel excluir a entidade: "+ e.getMessage() +"causa:" + e.getCause());
             return false;
         }
     }

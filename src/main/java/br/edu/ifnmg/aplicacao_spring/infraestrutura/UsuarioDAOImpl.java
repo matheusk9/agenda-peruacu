@@ -16,7 +16,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario, Long>
     @Override
     public Usuario buscarPorLogin(String login) {
         try {
-            TypedQuery<Usuario> query = getManager().createQuery("SELECT u FROM Usuario WHERE u.login = :login", Usuario.class);
+            TypedQuery<Usuario> query = getManager().createQuery("SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class);
             query.setParameter("login", login); // setando o parametro pra query
             return query.getSingleResult();
         } catch (Exception ex){

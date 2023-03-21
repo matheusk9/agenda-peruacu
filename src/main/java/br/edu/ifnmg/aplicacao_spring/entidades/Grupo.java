@@ -1,12 +1,10 @@
 package br.edu.ifnmg.aplicacao_spring.entidades;
 
-import br.edu.ifnmg.aplicacao_spring.entidades.Atrativo;
-import br.edu.ifnmg.aplicacao_spring.entidades.PeriodoVisita;
-import br.edu.ifnmg.aplicacao_spring.entidades.ResponsavelGrupo;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Objects;
+
 
 @Entity
 @Table(name = "grupos")

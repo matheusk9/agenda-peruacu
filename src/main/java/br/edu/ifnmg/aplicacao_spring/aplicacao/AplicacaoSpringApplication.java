@@ -25,10 +25,35 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Usuario u = new Usuario();
-		u.setLogin("matheus");
-		u.setPassword("123");
 
+		//------ Salvar - Funfou -------
+	/*
+		u.setLogin("pedro");
+		u.setPassword("351");
 		usuarios.salvar(u);
+	*/
+
+
+		// ------ Atualizar + busca por ID  funcionou -------
+	/*
+		u = usuarios.buscaPorId(3L);
+		u.setLogin("JoaoAtualizado");
+		usuarios.atualizar(u);
+	 */
+
+		// ------ Busca por Login funcionou -------
+		System.out.println("Busca por Login: "+ usuarios.buscarPorLogin("matheus"));
+
+
+		// ------ Listar todos funcinou -------
+		for (Usuario uu : usuarios.buscarTodos()){	//funfou
+			System.out.println(uu);
+		}
+
+		// ------ EXCLUIR FUNCIONAL ------
+		u = usuarios.buscaPorId(3L);
+		usuarios.excluir(u);
+
 	}
 
 }

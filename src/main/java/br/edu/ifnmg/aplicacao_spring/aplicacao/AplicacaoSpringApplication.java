@@ -28,7 +28,7 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 		Usuario u = new Usuario();
 
 		//------ Salvar - Funfou -------
-		u.setLogin("novoUsuario");
+		u.setLogin("novoUsuarwerio");
 		u.setPassword("teste123");
 		usuarios.salvar(u);
 
@@ -36,7 +36,7 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 		u = usuarios.buscaPorId(6L);
 		u.setLogin("Carlos");
 		u.setPassword("password");
-		usuarios.atualizar(u);
+	//	usuarios.atualizar(u);
 
 		// ------ Busca por Login funcionou -------
 		System.out.println("Busca por Login: "+ usuarios.buscarPorLogin("matheus"));
@@ -49,7 +49,7 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 
 		// ------ EXCLUIR FUNCIONAL ------
 		u = usuarios.buscaPorId(4L);
-		usuarios.excluir(u);
+	//	usuarios.excluir(u);
 
 	}
 }

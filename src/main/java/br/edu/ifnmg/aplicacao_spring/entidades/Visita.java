@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name = "grupos")
-public class Grupo {
+@Table(name = "visitas")
+public class Visita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -82,7 +82,7 @@ public class Grupo {
 
     @Override
     public String toString() {
-        return "Grupo{" +
+        return "Visita{" +
                 "responsavelGrupo=" + responsavelGrupo +
                 '}';
     }

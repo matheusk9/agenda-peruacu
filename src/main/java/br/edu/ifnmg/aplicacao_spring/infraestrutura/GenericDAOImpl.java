@@ -19,7 +19,7 @@ public class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
         this.classePersistente = classePersistente;
     }
 
-   protected EntityManager getManager() {
+    protected EntityManager getManager() {
         return manager;
     }
 

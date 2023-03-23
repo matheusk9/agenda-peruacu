@@ -1,7 +1,9 @@
 package br.edu.ifnmg.aplicacao_spring.aplicacao;
 
+import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
 import br.edu.ifnmg.aplicacao_spring.entidades.ResponsavelGrupo;
 import br.edu.ifnmg.aplicacao_spring.entidades.Usuario;
+import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
 import org.springframework.boot.CommandLineRunner;
@@ -15,10 +17,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class AplicacaoSpringApplication implements CommandLineRunner {
 
+	private final GuiaDAO guias;
 	private final ResponsavelGrupoDAO responsavel;
 	private final UsuarioDAO usuarios;
 
-	public AplicacaoSpringApplication(UsuarioDAO usuarios, ResponsavelGrupoDAO responsavel) {
+	public AplicacaoSpringApplication(GuiaDAO guias, UsuarioDAO usuarios, ResponsavelGrupoDAO responsavel) {
+		this.guias = guias;
 		this.usuarios = usuarios;
 		this.responsavel = responsavel;
 	}
@@ -54,7 +58,6 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	//	usuarios.excluir(u);
 	}
 
-	//@SuppressWarnings("unchecked")
 	public void testeResposavelGrupo(){
 		ResponsavelGrupo responsavelGrupo = new ResponsavelGrupo();
 
@@ -66,9 +69,17 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 
 	}
 
+	public void testeGuia(){
+		Guia guia = new Guia();
+		guia.setNome("Jõao da Neves");
+		guia.setEmail("emailguia@oulook.com");
+		guia.setTelefone("38999745551");
+
+		guias.salvar(guia);
+
+	}
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(responsavel.buscaPorCPF("05114361650"));
-
+		testeGuia();
 	}
 }

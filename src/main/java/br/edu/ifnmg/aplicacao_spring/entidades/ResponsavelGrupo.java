@@ -6,13 +6,22 @@ import jakarta.persistence.*;
 @Table(name = "responsavel_grupo")
 public class ResponsavelGrupo {
 
+    public ResponsavelGrupo() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 200, nullable = false)
     private String nome;
+
+    @Column(length = 11, nullable = false, unique = true)
+    private String cpf;
+
     @Column(length = 15, nullable = false)
     private String telefone;
+
     @Column(nullable = false)
     private String email;
 
@@ -22,6 +31,14 @@ public class ResponsavelGrupo {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getTelefone() {
@@ -46,9 +63,7 @@ public class ResponsavelGrupo {
 
     @Override
     public String toString() {
-        return "ResponsavelGrupo{" +
-                "nome='" + nome + '\'' +
-                '}';
+        return "Visitante =" + nome;
     }
 
 }

@@ -1,13 +1,10 @@
 package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 
 public class AplicacaoJavaFX extends Application {
 

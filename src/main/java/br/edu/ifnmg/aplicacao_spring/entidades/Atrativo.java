@@ -11,7 +11,7 @@ public class Atrativo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(insertable = false, updatable = false)
+    @Column(updatable = false, unique = true)
     private AtrativoEnum nome;
 
     public Long getId() {
@@ -28,8 +28,6 @@ public class Atrativo {
 
     @Override
     public String toString() {
-        return "Atrativo{" +
-                "nome=" + nome +
-                '}';
+        return "nome = " + nome.getNome();
     }
 }

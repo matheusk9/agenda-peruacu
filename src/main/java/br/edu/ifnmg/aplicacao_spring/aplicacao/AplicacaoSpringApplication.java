@@ -1,8 +1,6 @@
 package br.edu.ifnmg.aplicacao_spring.aplicacao;
 
-import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
-import br.edu.ifnmg.aplicacao_spring.entidades.ResponsavelGrupo;
-import br.edu.ifnmg.aplicacao_spring.entidades.Usuario;
+import br.edu.ifnmg.aplicacao_spring.entidades.*;
 import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
@@ -34,8 +32,8 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	public void testeUsuarios(){
 		Usuario u = new Usuario();
 		//------ Salvar - Funfou -------
-		u.setLogin("matheus");
-		u.setPassword("senahaaa");
+		u.setLogin("gerinha");
+		u.setPassword("maisumasen");
 		usuarios.salvar(u);
 
 		// ------ Atualizar + busca por ID  funcionou -------
@@ -80,6 +78,7 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		testeGuia();
+		testeUsuarios();
+
 	}
 }

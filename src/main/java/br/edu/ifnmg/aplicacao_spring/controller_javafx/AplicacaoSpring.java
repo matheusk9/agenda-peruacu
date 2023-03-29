@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
-@EntityScan("br.edu.ifnmg.aplicacao_spring")
-@ComponentScan("br.edu.ifnmg.aplicacao_spring")
+@EntityScan("br.edu.ifnmg.aplicacao_spring.entidades")
+@ComponentScan({"br.edu.ifnmg.aplicacao_spring.infraestrutura","br.edu.ifnmg.aplicacao_spring.controller_javafx"})
 @SpringBootApplication
 public class AplicacaoSpring {
 

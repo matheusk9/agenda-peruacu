@@ -1,28 +1,41 @@
 package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxWeaver;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
 public class AplicacaoJavaFX extends Application {
 
+    private ConfigurableApplicationContext contextoSpring;
+
     @Override
-    public void start(Stage primaryStage) {
-        Button button = new Button("Clique para exibir mensagem");
+    public void init() {
+        String[] args = getParameters().getRaw().toArray(new String[0]);
 
-        button.setOnAction(e -> {
-            System.out.println("Olá, mundo!");
-        });
+        this.contextoSpring = new SpringApplicationBuilder()
+                .sources(AplicacaoSpring.class)
+                .run(args);
+    }
 
-        VBox root = new VBox();
-        root.getChildren().add(button);
+    @Override
+    public void stop() {
+        this.contextoSpring.close();
+        Platform.exit();
+    }
 
-        Scene scene = new Scene(root, 300, 250);
+    @Override
+    public void start(Stage stage) {
+        FxWeaver fxWeaver = new FxWeaver(contextoSpring::getBean, contextoSpring::close);
+        Parent root = fxWeaver.loadView(LoginController.class);
+        Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Teste JavaFX");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.demo2.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.MainController">
     <children>
         <BorderPane prefHeight="500.0" prefWidth="788.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -106,7 +106,7 @@
                                     </HBox>
                                  </top>
                                  <center>
-                                    <TableView fx:id="tbVMembros" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tbViewVisitas" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
                                       <columns>
                                         <TableColumn fx:id="tcNome" prefWidth="75.0" text="Nome do Responsável" />
                                         <TableColumn fx:id="tcTelefone" prefWidth="75.0" text="Telefone" />
@@ -149,12 +149,12 @@
                                     </HBox>
                                  </top>
                                  <center>
-                                    <TableView fx:id="tbVMembros1" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tbViewGuias" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
                                        <columns>
-                                          <TableColumn fx:id="tcNome1" prefWidth="75.0" text="Nome" />
-                                          <TableColumn fx:id="tcTelefone1" prefWidth="75.0" text="Telefone" />
-                                          <TableColumn fx:id="tcCpf1" prefWidth="75.0" text="CPF" />
-                                          <TableColumn fx:id="tcAcao1" prefWidth="75.0" text="Ações" />
+                                          <TableColumn fx:id="tcNomeGuia" prefWidth="75.0" text="Nome" />
+                                          <TableColumn fx:id="tcTelefoneGuia" prefWidth="75.0" text="Telefone" />
+                                          <TableColumn fx:id="tcCPFGuia" prefWidth="75.0" text="CPF" />
+                                          <TableColumn fx:id="tcAcaoGuia" prefWidth="75.0" text="Ações" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -190,12 +190,12 @@
                                     </HBox>
                                  </top>
                                  <center>
-                                    <TableView fx:id="tbVMembros2" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tbViewADM" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" BorderPane.alignment="CENTER">
                                        <columns>
-                                          <TableColumn fx:id="tcNome2" prefWidth="75.0" text="Nome" />
-                                          <TableColumn fx:id="tcTelefone2" prefWidth="75.0" text="Telefone" />
-                                          <TableColumn fx:id="tcCpf2" prefWidth="75.0" text="CPF" />
-                                          <TableColumn fx:id="tcAcao2" prefWidth="75.0" text="Ações" />
+                                          <TableColumn fx:id="tcNomeADM" prefWidth="75.0" text="Nome" />
+                                          <TableColumn fx:id="tcTelefoneADM" prefWidth="75.0" text="Telefone" />
+                                          <TableColumn fx:id="tcCPFADM" prefWidth="75.0" text="CPF" />
+                                          <TableColumn fx:id="tcAcaoADM" prefWidth="75.0" text="Ações" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

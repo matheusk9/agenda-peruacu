@@ -30,9 +30,10 @@ public class LoginController {
 
     @FXML
     void autenticar(ActionEvent event) {
-        for (Usuario uu : usuarios.buscarTodos()){	//funfou
-            System.out.println(uu);
-        }
+        AplicacaoJavaFX.getStage().close();
+        AplicacaoJavaFX.carregarTela(AplicacaoJavaFX
+                .getMainScreen())
+                .show();
     }
 
 }

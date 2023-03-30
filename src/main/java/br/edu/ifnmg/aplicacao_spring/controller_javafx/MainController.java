@@ -5,7 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.stereotype.Component;
 
+@Component
+@FxmlView("viewMain.fxml")
 public class MainController {
 
     @FXML
@@ -67,6 +71,9 @@ public class MainController {
 
     @FXML
     private TableColumn<?, ?> tcTelefoneGuia;
+
+    public MainController() {
+    }
 
     @FXML
     void adicionarNovoAdm(ActionEvent event) {

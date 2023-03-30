@@ -12,12 +12,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class AplicacaoJavaFX extends Application {
 
     private ConfigurableApplicationContext contextoSpring;
-    private static Stage stage, innerStage;
-    private static Parent mainScreen;
-
-    public static Parent getMainScreen() {
-        return mainScreen;
-    }
+    private static Stage stage;
+    private static Parent mainScreen, addGuiaScreen;
+    private static Scene mainScene, guiaScene;
 
     public static Stage getStage() {
         return stage;
@@ -25,14 +22,6 @@ public class AplicacaoJavaFX extends Application {
 
     public static void setStage(Stage stage) {
         AplicacaoJavaFX.stage = stage;
-    }
-
-    public static Stage getInnerStage() {
-        return innerStage;
-    }
-
-    public static void setInnerStage(Stage innerStage) {
-        AplicacaoJavaFX.innerStage = innerStage;
     }
 
     @Override
@@ -50,30 +39,33 @@ public class AplicacaoJavaFX extends Application {
         Platform.exit();
     }
 
-    public static Stage carregarTela(Parent telaFXML){
-
-        Scene newScene = new Scene(telaFXML);
-        innerStage = new Stage(){{setScene(newScene); }};
-        return innerStage;
+    public static void carregarTela(String scr){
+        switch (scr){
+            case "main":
+                stage.setScene(mainScene);
+                break;
+            case "addGuia":
+                stage.setScene(guiaScene);
+        }
     }
 
     @Override
     public void start(Stage primaryStage) {
-        FxWeaver fxWeaver = new FxWeaver(contextoSpring::getBean, contextoSpring::close);
-        // carregando os FXML
-        Parent root = fxWeaver.loadView(LoginController.class);
-        mainScreen = fxWeaver.loadView(MainController.class);
-
-
-        // colocando os FXML em uma scene
-        Scene scene = new Scene(root);
-
-        //setando a scene para a janela
         setStage(primaryStage);
-        stage.setScene(scene);
-        stage.show();
+        FxWeaver fxWeaver = new FxWeaver(contextoSpring::getBean, contextoSpring::close);
 
+        // carregando as telas
+        Parent root = fxWeaver.loadView(LoginController.class);
+        Scene scene = new Scene(root);
+        mainScreen = fxWeaver.loadView(MainController.class);
+        mainScene = new Scene(mainScreen);
+        addGuiaScreen = fxWeaver.loadView(AdicionarGuiaController.class);
+        guiaScene = new Scene(addGuiaScreen);
 
-
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+
+
+
 }

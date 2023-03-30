@@ -46,7 +46,7 @@ public class MainController {
     private TableColumn<?, ?> tcCPFADM;
 
     @FXML
-    private TableColumn<?, ?> tcCPFGuia;
+    private TableColumn<?, ?> tcEmailGuia;
 
     @FXML
     private TableColumn<?, ?> tcCpf;
@@ -82,7 +82,7 @@ public class MainController {
 
     @FXML
     void adicionarNovosGuias(ActionEvent event) {
-
+        AplicacaoJavaFX.carregarTela("addGuia");
     }
 
     @FXML

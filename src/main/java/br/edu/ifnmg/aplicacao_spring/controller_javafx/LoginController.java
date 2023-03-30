@@ -34,8 +34,7 @@ public class LoginController {
         String user = fieldLogin.getText();
         String password = fieldPassword.getText();
         if(login.autenticar(user, password)){
-            AplicacaoJavaFX.getStage().close();
-            AplicacaoJavaFX.carregarTela(AplicacaoJavaFX.getMainScreen()).show();
+            AplicacaoJavaFX.carregarTela("main");
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR, "Usuário ou senha inválidos. Deseja sair?", ButtonType.YES, ButtonType.NO);

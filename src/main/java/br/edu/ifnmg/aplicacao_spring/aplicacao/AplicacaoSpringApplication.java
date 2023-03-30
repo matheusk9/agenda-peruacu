@@ -4,11 +4,15 @@ import br.edu.ifnmg.aplicacao_spring.entidades.*;
 import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
+import br.edu.ifnmg.aplicacao_spring.servicos.VisitaDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @EntityScan("br.edu.ifnmg.aplicacao_spring.entidades")
 @ComponentScan({"br.edu.ifnmg.aplicacao_spring.infraestrutura"})
@@ -18,11 +22,13 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	private final GuiaDAO guias;
 	private final ResponsavelGrupoDAO responsavel;
 	private final UsuarioDAO usuarios;
+	private final VisitaDAO visitas;
 
-	public AplicacaoSpringApplication(GuiaDAO guias, UsuarioDAO usuarios, ResponsavelGrupoDAO responsavel) {
+	public AplicacaoSpringApplication(GuiaDAO guias, UsuarioDAO usuarios, ResponsavelGrupoDAO responsavel, VisitaDAO visitas) {
 		this.guias = guias;
 		this.usuarios = usuarios;
 		this.responsavel = responsavel;
+		this.visitas = visitas;
 	}
 
 	public static void main(String[] args) {
@@ -78,6 +84,16 @@ public class AplicacaoSpringApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
+		Visita visita = new Visita();
+		ResponsavelGrupo responsavelGrupo = responsavel.buscaPorId(1L);
+		Guia guia = guias.buscaPorId(1L);
 
+
+		visita.setPeriodoVisita(PeriodoVisita.MANHA);
+		visita.setNumeroVisitantes(6);
+		visita.setGuia(guia);
+		visita.setResponsavelGrupo(responsavelGrupo);
+
+		visitas.salvar(visita);
 	}
 }

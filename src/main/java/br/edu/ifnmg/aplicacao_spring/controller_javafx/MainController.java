@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,12 @@ public class MainController implements Initializable {
     private Tab abaGuias;
     @FXML
     private Tab abaUsuarios;
+    @FXML
+    private ImageView iconDelete;
+    @FXML
+    private ImageView iconEdit;
+    @FXML
+    private ImageView iconRefresh;
 
     @FXML
     private TableView<Usuario> tbViewUsuario;
@@ -92,7 +99,7 @@ public class MainController implements Initializable {
     }
 
 
-    // --- GUIAS ---
+    // --- CRUD GUIAS ---
     @FXML
     void adicionarNovosGuias(ActionEvent event) {
         AplicacaoJavaFX.carregarTela("addGuia");

@@ -116,10 +116,12 @@ public class MainController implements Initializable {
                 tbViewVisitas.refresh();
             }
             else if(abaGuias.isSelected()){
-                Long id = tbViewGuias.getSelectionModel().getSelectedItem().getId();
-                guiaRepository.excluir(guiaRepository.buscaPorId(id));
 
-                // FALTA ATUALIZAR A TABELA APOS EXCLUSAO *************************************
+                Long id = tbViewGuias.getSelectionModel().getSelectedItem().getId();
+                int index = tbViewGuias.getSelectionModel().getSelectedIndex();
+                guiaRepository.excluir(guiaRepository.buscaPorId(id));
+                tbViewGuias.getItems().remove(index);
+
             } else if (abaUsuarios.isSelected()) {
                 tbViewUsuario.refresh();
             }
@@ -173,6 +175,12 @@ public class MainController implements Initializable {
             alert.setHeaderText("Você já está logado como administrador.");
             alert.showAndWait();
         }
+    }
 
+    // Limpa os campos preenchidos
+    protected static void limparCampos(TextField[] campos){
+        for(TextField campo:campos){
+            campo.clear();
+        }
     }
 }

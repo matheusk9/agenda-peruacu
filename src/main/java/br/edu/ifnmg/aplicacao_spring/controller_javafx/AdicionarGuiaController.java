@@ -32,17 +32,24 @@ public class AdicionarGuiaController{
     @FXML
     void adicionar() {
         Guia guia = new Guia();
-        String nome = fieldNomeGuia.getText();
-        String email = fieldEmailGuia.getText();
-        String tel = fieldTelGuia.getText();
-        if(MainController.guiaRepository.buscaPorEmail(email) == null){
-            guia.setNome(nome);
-            guia.setEmail(email);
-            guia.setTelefone(tel);
-            MainController.guiaRepository.salvar(guia);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
-            alert.showAndWait();
-            AplicacaoJavaFX.carregarTela("main");
+
+        if(MainController.guiaRepository.buscaPorEmail(fieldEmailGuia.getText()) == null){
+            guia.setNome(fieldNomeGuia.getText());
+            guia.setEmail(fieldEmailGuia.getText());
+            guia.setTelefone(fieldTelGuia.getText());
+            try{
+                // salvando no BD
+                MainController.guiaRepository.salvar(guia);
+                // limpando campos
+                MainController.limparCampos(new TextField[]{fieldNomeGuia, fieldEmailGuia, fieldTelGuia});
+                // sucesso
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
+                alert.showAndWait();
+                AplicacaoJavaFX.carregarTela("main");
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.FINISH);
+                alert.showAndWait();
+            }
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR, "Esse email já está cadastrado!", ButtonType.CLOSE);
@@ -52,6 +59,7 @@ public class AdicionarGuiaController{
 
     @FXML
     void cancelar() {
+        MainController.limparCampos(new TextField[]{fieldNomeGuia, fieldEmailGuia, fieldTelGuia});
         AplicacaoJavaFX.carregarTela("main");
     }
 }

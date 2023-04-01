@@ -110,6 +110,23 @@ public class MainController implements Initializable {
                 System.out.println("TA ACONTECENDO NADA");
             }
         });
+
+        iconDelete.setOnMouseClicked(event -> {
+            if(abaAgendamento.isSelected()){
+                tbViewVisitas.refresh();
+            }
+            else if(abaGuias.isSelected()){
+                Long id = tbViewGuias.getSelectionModel().getSelectedItem().getId();
+                guiaRepository.excluir(guiaRepository.buscaPorId(id));
+
+                // FALTA ATUALIZAR A TABELA APOS EXCLUSAO *************************************
+            } else if (abaUsuarios.isSelected()) {
+                tbViewUsuario.refresh();
+            }
+            else{
+                System.out.println("TA ACONTECENDO NADA");
+            }
+        });
     }
 
     @FXML

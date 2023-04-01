@@ -1,7 +1,6 @@
 package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 
 import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
-import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @FxmlView("viewAdicionarGuia.fxml")
-public class AdicionarGuiaController {
+public class AdicionarGuiaController{
 
     @FXML
     private Button btnCancelar;
@@ -29,11 +28,6 @@ public class AdicionarGuiaController {
     @FXML
     private TextField fieldTelGuia;
 
-    private final GuiaDAO guiaRepository;
-
-    public AdicionarGuiaController(GuiaDAO guiaRepository) {
-        this.guiaRepository = guiaRepository;
-    }
 
     @FXML
     void adicionar() {
@@ -41,12 +35,11 @@ public class AdicionarGuiaController {
         String nome = fieldNomeGuia.getText();
         String email = fieldEmailGuia.getText();
         String tel = fieldTelGuia.getText();
-
-        if(guiaRepository.buscaPorEmail(email) == null){
+        if(MainController.guiaRepository.buscaPorEmail(email) == null){
             guia.setNome(nome);
             guia.setEmail(email);
             guia.setTelefone(tel);
-            guiaRepository.salvar(guia);
+            MainController.guiaRepository.salvar(guia);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
             alert.showAndWait();
             AplicacaoJavaFX.carregarTela("main");

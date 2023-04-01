@@ -84,7 +84,7 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab text="Agendamento">
+                  <Tab fx:id="abaAgendamento" text="Agendamento">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

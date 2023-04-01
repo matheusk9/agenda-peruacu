@@ -14,12 +14,13 @@ import javafx.scene.image.ImageView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
+
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 @Component
-@FxmlView("viewMain.fxml")
+@FxmlView(value = "viewMain.fxml")
 public class MainController implements Initializable {
 
     @FXML
@@ -34,6 +35,8 @@ public class MainController implements Initializable {
     private Tab abaGuias;
     @FXML
     private Tab abaUsuarios;
+    @FXML
+    private Tab abaAgendamento;
     @FXML
     private ImageView iconDelete;
     @FXML
@@ -82,9 +85,10 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<?, ?> tcTelefone;
 
-    private final GuiaDAO guiaRepository;
-    public MainController(GuiaDAO guiaRepository) {
-        this.guiaRepository = guiaRepository;
+    protected static GuiaDAO guiaRepository;
+
+    public MainController( GuiaDAO guiaRepository) {
+        MainController.guiaRepository = guiaRepository;
     }
 
 
@@ -92,25 +96,39 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         abaGuias.setDisable(true);
         abaUsuarios.setDisable(true);
+
+        iconRefresh.setOnMouseClicked(event -> {
+            if(abaAgendamento.isSelected()){
+                tbViewVisitas.refresh();
+            }
+            else if(abaGuias.isSelected()){
+                atualizarTabelaGuias();
+            } else if (abaUsuarios.isSelected()) {
+                tbViewUsuario.refresh();
+            }
+            else{
+                System.out.println("TA ACONTECENDO NADA");
+            }
+        });
     }
 
     @FXML
-    void adicionarNovoAdm(ActionEvent event) {
+    private void adicionarNovoAdm(ActionEvent event) {
     }
 
 
     // --- CRUD GUIAS ---
     @FXML
-    void adicionarNovosGuias(ActionEvent event) {
+    private void adicionarNovosGuias(ActionEvent event) {
         AplicacaoJavaFX.carregarTela("addGuia");
     }
 
-    ObservableList<Guia> listarTabelaGuia(){
+    private ObservableList<Guia> listarTabelaGuia(){
         //retorna uma ObservableList do BD através de um casting feito com o FXCollections
         return FXCollections.observableArrayList(guiaRepository.buscarTodos());
     }
     @FXML
-    void tableViewGuias(){
+    private void atualizarTabelaGuias(){
         tcIDGuia.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcNomeGuia.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tcTelefoneGuia.setCellValueFactory(new PropertyValueFactory<>("telefone"));
@@ -119,18 +137,18 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void agendarNovaVisita(ActionEvent event) {
+    private void agendarNovaVisita(ActionEvent event) {
     }
 
     // --- PAINEL DE CONTROLE ---
     @FXML
-    void painelControle(){
+    private void painelControle(){
         if(!JanelaADM.isLogin()){
             JanelaADM.callScren();
             if(JanelaADM.isLogin()){
                 abaGuias.setDisable(false);
                 abaUsuarios.setDisable(false);
-                tableViewGuias();
+                atualizarTabelaGuias();
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

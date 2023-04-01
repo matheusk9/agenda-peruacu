@@ -115,7 +115,6 @@
                                           <TableColumn fx:id="tcCpf" prefWidth="75.0" text="CPF" />
                                           <TableColumn fx:id="tcData" prefWidth="75.0" text="Data" />
                                           <TableColumn fx:id="tcAtrativo" prefWidth="75.0" text="Atrativo" />
-                                          <TableColumn fx:id="tcAcao" prefWidth="75.0" text="Ações" />
                                       </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -157,7 +156,6 @@
                                           <TableColumn fx:id="tcNomeGuia" prefWidth="75.0" text="Nome" />
                                           <TableColumn fx:id="tcTelefoneGuia" prefWidth="75.0" text="Telefone" />
                                           <TableColumn fx:id="tcEmailGuia" prefWidth="75.0" text="E-mail" />
-                                          <TableColumn fx:id="tcAcaoGuia" prefWidth="75.0" text="Ações" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -199,7 +197,6 @@
                                           <TableColumn fx:id="tcDateCreateUsuario" prefWidth="75.0" text="Data da criação" />
                                           <TableColumn fx:id="tcLoginUsuario" prefWidth="75.0" text="Login" />
                                           <TableColumn fx:id="tcSenhaUsuario" prefWidth="75.0" text="Senha" />
-                                          <TableColumn fx:id="tcAcaoUsuario" prefWidth="75.0" text="Ações" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -54,8 +54,6 @@ public class MainController implements Initializable {
     private TableColumn<Usuario, String> tcLoginUsuario;
     @FXML
     private TableColumn<Usuario, String> tcSenhaUsuario;
-    @FXML
-    private TableColumn<?, ?> tcAcaoUsuario;
 
     @FXML
     private TableView<Guia> tbViewGuias;
@@ -67,13 +65,9 @@ public class MainController implements Initializable {
     private TableColumn<Guia, String> tcNomeGuia;
     @FXML
     private TableColumn<Guia, String> tcTelefoneGuia;
-    @FXML
-    private TableColumn<?, ?> tcAcaoGuia;
 
     @FXML
     private TableView<?> tbViewVisitas;
-    @FXML
-    private TableColumn<?, ?> tcAcao;
     @FXML
     private TableColumn<?, ?> tcAtrativo;
     @FXML

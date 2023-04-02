@@ -3,16 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="351.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.AdicionarGuiaController">
-   <TextField fx:id="fieldNomeGuia" layoutX="84.0" layoutY="100.0" prefHeight="25.0" prefWidth="209.0" promptText="nome completo" />
-   <Button fx:id="btnConfirmar" layoutX="92.0" layoutY="279.0" mnemonicParsing="false" onAction="#adicionar" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: green;" stylesheets="@css/stylling.css" text="Confirmar" textFill="WHITE">
+   <TextField fx:id="fieldNomeGuia" layoutX="84.0" layoutY="100.0" prefHeight="25.0" prefWidth="209.0" promptText="nome completo">
+      <effect>
+         <DropShadow />
+      </effect></TextField>
+   <Button fx:id="btnConfirmar" layoutX="92.0" layoutY="279.0" mnemonicParsing="false" onAction="#adicionar" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: green;" stylesheets="@css/stylling.css" text="Confirmar" textAlignment="CENTER" textFill="WHITE">
       <font>
          <Font name="System Bold" size="12.0" />
       </font>
+      <effect>
+         <DropShadow />
+      </effect>
    </Button>
    <Pane prefHeight="54.0" prefWidth="376.0" style="-fx-background-color: #576171;">
       <Label blendMode="COLOR_BURN" layoutX="109.0" layoutY="13.0" text="ADICIONAR GUIA" textAlignment="CENTER">
@@ -20,8 +27,23 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
+      <effect>
+         <DropShadow />
+      </effect>
    </Pane>
-   <TextField fx:id="fieldEmailGuia" layoutX="85.0" layoutY="151.0" prefHeight="25.0" prefWidth="209.0" promptText="e-mail" />
-   <TextField fx:id="fieldTelGuia" layoutX="84.0" layoutY="205.0" prefHeight="25.0" prefWidth="209.0" promptText="telefone" />
-   <Button fx:id="btnCancelar" layoutX="189.0" layoutY="279.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: red;" stylesheets="@css/stylling.css" text="Cancelar" textFill="WHITE" />
+   <TextField fx:id="fieldEmailGuia" layoutX="85.0" layoutY="151.0" prefHeight="25.0" prefWidth="209.0" promptText="e-mail">
+      <effect>
+         <DropShadow />
+      </effect></TextField>
+   <TextField fx:id="fieldTelGuia" layoutX="84.0" layoutY="205.0" prefHeight="25.0" prefWidth="209.0" promptText="telefone">
+      <effect>
+         <DropShadow />
+      </effect></TextField>
+   <Button fx:id="btnCancelar" layoutX="189.0" layoutY="279.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: red;" stylesheets="@css/stylling.css" text="Cancelar" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect></Button>
 </AnchorPane>

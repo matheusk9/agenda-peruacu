@@ -12,12 +12,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.MainController">
@@ -40,6 +43,9 @@
                      <padding>
                         <Insets left="20.0" />
                      </padding>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Button>
                   <Button fx:id="btnPainelControle" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#painelControle" prefHeight="32.0" prefWidth="172.0" text="Painel de Controle" textFill="WHITE">
                      <graphic>
@@ -55,6 +61,12 @@
                      <padding>
                         <Insets left="20.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Button>
                     </children>
                <padding>
@@ -69,8 +81,15 @@
                      <image>
                         <Image url="@icons/1800235.png" />
                      </image>
+                     <effect>
+                        <Glow level="0.2">
+                           <input>
+                              <DropShadow />
+                           </input>
+                        </Glow>
+                     </effect>
                   </ImageView>
-                  <Label text="Painel de Controle" textFill="WHITE">
+                  <Label text="Cavernas do Peruaçu" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
@@ -86,7 +105,7 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@css/stylling.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="abaAgendamento" onSelectionChanged="#funcoesAbaAgendamento" text="Agendamento">
+                  <Tab fx:id="abaAgendamento" text="Agendamento">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -102,7 +121,10 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarNovo" mnemonicParsing="false" onAction="#agendarNovaVisita" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa" />
+                                          <Button fx:id="btnAdicionarNovo" mnemonicParsing="false" onAction="#agendarNovaVisita" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect></Button>
                                        </children>
                                        <padding>
                                           <Insets left="30.0" />
@@ -145,7 +167,10 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarGuia" mnemonicParsing="false" onAction="#adicionarNovosGuias" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa" />
+                                          <Button fx:id="btnAdicionarGuia" mnemonicParsing="false" onAction="#adicionarNovosGuias" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect></Button>
                                        </children>
                                        <padding>
                                           <Insets left="30.0" />
@@ -186,7 +211,10 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarAdm" mnemonicParsing="false" onAction="#adicionarNovoAdm" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa" />
+                                          <Button fx:id="btnAdicionarAdm" mnemonicParsing="false" onAction="#adicionarNovoAdm" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect></Button>
                                        </children>
                                        <padding>
                                           <Insets left="30.0" />
@@ -245,30 +273,39 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <AnchorPane fx:id="paneGuiasEdit" layoutX="250.0" layoutY="341.0" prefHeight="160.0" prefWidth="457.0" style="-fx-background-color: #8392AA;">
+      <AnchorPane fx:id="anchorPaneEdit" layoutX="250.0" layoutY="341.0" prefHeight="160.0" prefWidth="457.0" style="-fx-background-color: #8392AA;">
          <children>
             <Group fx:id="detailsGuias" layoutX="60.0" layoutY="31.0" visible="false">
                <children>
                   <Label layoutX="7.0" layoutY="4.0" text="Nome" />
                   <Label layoutY="36.0" text="Telefone" />
                   <Label layoutX="6.0" layoutY="71.0" text="E-mail" />
-                  <TextField fx:id="fieldEditNome" layoutX="66.0">
+                  <TextField fx:id="fieldEditNomeGuia" layoutX="66.0">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </TextField>
-                  <TextField fx:id="fieldEditTelefone" layoutX="66.0" layoutY="32.0">
+                  <TextField fx:id="fieldEditTelefoneGuia" layoutX="66.0" layoutY="32.0">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </TextField>
-                  <TextField fx:id="fieldEditEmail" layoutX="66.0" layoutY="67.0">
+                  <TextField fx:id="fieldEditEmailGuia" layoutX="66.0" layoutY="67.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </TextField>
                </children>
             </Group>
@@ -279,6 +316,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.30565303564071655" green="0.7368420958518982" blue="0.19785575568675995" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </Button>
             <Button fx:id="btnCancelar" blendMode="COLOR_BURN" layoutX="318.0" layoutY="77.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: Salmon;" text="Cancelar" textFill="#3c3434e8">
                <font>
@@ -287,24 +331,40 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.6578947305679321" green="0.13401558995246887" blue="0.13401558995246887" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </Button>
             <Group fx:id="detailsUsers" layoutX="57.0" layoutY="36.0" visible="false">
                <children>
                   <Label layoutX="7.0" layoutY="4.0" text="Login" />
                   <Label layoutX="5.0" layoutY="36.0" text="Senha" />
-                  <TextField fx:id="fieldEditLogin" layoutX="66.0">
+                  <TextField fx:id="fieldEditLoginUser" layoutX="66.0">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </TextField>
-                  <TextField fx:id="fieldEditSenha" layoutX="66.0" layoutY="32.0">
+                  <TextField fx:id="fieldEditSenhaUser" layoutX="66.0" layoutY="32.0">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </TextField>
                </children>
             </Group>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
     </children>
 </AnchorPane>

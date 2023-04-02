@@ -8,9 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +29,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     @FXML
+    private AnchorPane paneGuiasEdit;
+    @FXML
     private Button btnAdicionarAdm;
     @FXML
     private Button btnAdicionarGuia;
@@ -31,6 +38,11 @@ public class MainController implements Initializable {
     private Button btnAdicionarNovo;
     @FXML
     private Button btnPainelControle;
+    @FXML
+    private Button btnAtualizar;
+    @FXML
+    private Button btnCancelar;
+
     @FXML
     private Tab abaGuias;
     @FXML
@@ -54,6 +66,12 @@ public class MainController implements Initializable {
     private TableColumn<Usuario, String> tcLoginUsuario;
     @FXML
     private TableColumn<Usuario, String> tcSenhaUsuario;
+    @FXML
+    private Group detailsUsers;
+    @FXML
+    private TextField fieldEditSenha;
+    @FXML
+    private TextField fieldEditLogin;
 
     @FXML
     private TableView<Guia> tbViewGuias;
@@ -65,6 +83,14 @@ public class MainController implements Initializable {
     private TableColumn<Guia, String> tcNomeGuia;
     @FXML
     private TableColumn<Guia, String> tcTelefoneGuia;
+    @FXML
+    private TextField fieldEditEmail;
+    @FXML
+    private TextField fieldEditNome;
+    @FXML
+    private TextField fieldEditTelefone;
+    @FXML
+    private Group detailsGuias;
 
     @FXML
     private TableView<?> tbViewVisitas;
@@ -78,6 +104,8 @@ public class MainController implements Initializable {
     private TableColumn<?, ?> tcNome;
     @FXML
     private TableColumn<?, ?> tcTelefone;
+    @FXML
+    private TableColumn<?, ?> tcGuia;
 
     protected static GuiaDAO guiaRepository;
 
@@ -88,41 +116,12 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        paneGuiasEdit.setVisible(false);
         abaGuias.setDisable(true);
         abaUsuarios.setDisable(true);
 
-        iconRefresh.setOnMouseClicked(event -> {
-            if(abaAgendamento.isSelected()){
-                tbViewVisitas.refresh();
-            }
-            else if(abaGuias.isSelected()){
-                atualizarTabelaGuias();
-            } else if (abaUsuarios.isSelected()) {
-                tbViewUsuario.refresh();
-            }
-            else{
-                System.out.println("TA ACONTECENDO NADA");
-            }
-        });
+        iconEdit.setOnMouseClicked(event -> paneGuiasEdit.setVisible(!paneGuiasEdit.isVisible()));
 
-        iconDelete.setOnMouseClicked(event -> {
-            if(abaAgendamento.isSelected()){
-                tbViewVisitas.refresh();
-            }
-            else if(abaGuias.isSelected()){
-
-                Long id = tbViewGuias.getSelectionModel().getSelectedItem().getId();
-                int index = tbViewGuias.getSelectionModel().getSelectedIndex();
-                guiaRepository.excluir(guiaRepository.buscaPorId(id));
-                tbViewGuias.getItems().remove(index);
-
-            } else if (abaUsuarios.isSelected()) {
-                tbViewUsuario.refresh();
-            }
-            else{
-                System.out.println("TA ACONTECENDO NADA");
-            }
-        });
     }
 
     @FXML
@@ -177,4 +176,54 @@ public class MainController implements Initializable {
             campo.clear();
         }
     }
+
+    // --- ABA GUIAS ---
+    @FXML
+    private void funcoesAbaGuias(){
+        paneGuiasEdit.setVisible(false);
+        detailsUsers.setVisible(false);
+        detailsGuias.setVisible(true);
+
+        //delete
+        iconDelete.setOnMouseClicked(event -> {
+            Long id = tbViewGuias.getSelectionModel().getSelectedItem().getId();
+            int index = tbViewGuias.getSelectionModel().getSelectedIndex();
+            guiaRepository.excluir(guiaRepository.buscaPorId(id));
+            tbViewGuias.getItems().remove(index);
+        });
+
+        //refresh
+        iconRefresh.setOnMouseClicked(event -> atualizarTabelaGuias());
+    }
+
+    // --- ABA USUARIOS ---
+    @FXML
+    private void funcoesAbaUsuarios(){
+        paneGuiasEdit.setVisible(false);
+        detailsGuias.setVisible(false);
+        detailsUsers.setVisible(true);
+
+        iconDelete.setOnMouseClicked(event -> {
+
+        });
+
+        iconRefresh.setOnMouseClicked(event -> {});
+    }
+
+    // --- ABA AGENDAMENTO ---
+    @FXML
+    private void funcoesAbaAgendamento(){
+        paneGuiasEdit.setVisible(false);
+        detailsGuias.setVisible(false);
+        detailsUsers.setVisible(false);
+
+
+        iconDelete.setOnMouseClicked(event -> {
+
+        });
+
+        iconRefresh.setOnMouseClicked(event -> {});
+    }
+
+
 }

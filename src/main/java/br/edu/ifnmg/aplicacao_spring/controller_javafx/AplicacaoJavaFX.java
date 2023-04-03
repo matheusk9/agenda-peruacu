@@ -9,6 +9,8 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.ArrayList;
+
 public class AplicacaoJavaFX extends Application {
 
     private ConfigurableApplicationContext contextoSpring;
@@ -39,15 +41,6 @@ public class AplicacaoJavaFX extends Application {
         Platform.exit();
     }
 
-    public static void carregarTela(String scr){
-        switch (scr){
-            case "main":
-                stage.setScene(mainScene);
-                break;
-            case "addGuia":
-                stage.setScene(guiaScene);
-        }
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -66,6 +59,39 @@ public class AplicacaoJavaFX extends Application {
         primaryStage.show();
     }
 
+    public static void carregarTela(String scr, String nomeAba){
+        switch (scr){
+            case "main":
+                stage.setScene(mainScene);
+                notifyAllListeners("main", nomeAba);
+                break;
+            case "addGuia":
+                stage.setScene(guiaScene);
+                notifyAllListeners("addGuia", nomeAba);
+        }
+    }
+
+    public static void carregarTela(String scr){
+        carregarTela(scr, null);
+    }
+
+
+    // ------------ TROCAR INFORMAÇÕES ENTRE TELAS --------------
+    private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
+
+    public static interface OnChangeScreen{
+        void onScreenChanged(String newScreen, Object userData);
+    }
+
+    public static void addOnChangeScreenListener(OnChangeScreen newListener){
+        listeners.add(newListener);
+    }
+
+    private static void notifyAllListeners(String newScreen, Object userData){
+        for(OnChangeScreen l : listeners)
+            l.onScreenChanged(newScreen, userData);
+    }
+    // -------------- * ------------- * --------------------
 
 
 }

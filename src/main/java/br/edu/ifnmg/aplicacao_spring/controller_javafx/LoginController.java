@@ -31,8 +31,8 @@ public class LoginController {
 
     @FXML
     void autenticar() {
-        String user = "gerinha";  //fieldLogin.getText();
-        String password = "maisumasen";fieldPassword.getText();
+        String user = "joao";  //fieldLogin.getText();
+        String password = "oiiii";//fieldPassword.getText();
         if(login.autenticar(user, password)){
             AplicacaoJavaFX.carregarTela("main");
         }

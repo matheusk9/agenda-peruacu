@@ -69,7 +69,6 @@ public class AddNewController implements Initializable{
     @FXML
     private TextField fieldAddGuiaVisita;
 
-
     private void adicionarGuia(){
         Guia guia = new Guia();
         if (MainController.guiaRepository.buscaPorEmail(fieldEmailGuia.getText()) == null) {
@@ -80,7 +79,7 @@ public class AddNewController implements Initializable{
                 // salvando no BD
                 MainController.guiaRepository.salvar(guia);
                 // limpando campos
-                MainController.limparCampos(new TextField[]{fieldNomeGuia, fieldEmailGuia, fieldTelGuia});
+                clear();
                 // sucesso
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
                 alert.showAndWait();
@@ -106,7 +105,7 @@ public class AddNewController implements Initializable{
                 // salvando no BD
                 MainController.usuarioRepository.salvar(usuario);
                 // limpando campos
-                MainController.limparCampos(new TextField[]{fieldAddLoginUser, fieldAddSenhaUser});
+                clear();
                 // sucesso
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
                 alert.showAndWait();
@@ -121,11 +120,14 @@ public class AddNewController implements Initializable{
         }
     }
 
-
+    void clear(){
+        MainController.limparCampos(new TextField[]
+                {fieldNomeGuia, fieldTelGuia, fieldEmailGuia, fieldAddLoginUser, fieldAddSenhaUser});
+    }
 
     @FXML
     void cancelar() {
-        MainController.limparCampos(new TextField[]{fieldNomeGuia, fieldEmailGuia, fieldTelGuia});
+        clear();
         AplicacaoJavaFX.carregarTela("main");
     }
 
@@ -145,18 +147,14 @@ public class AddNewController implements Initializable{
                     getGroupAddNovoUsuario().setVisible(false);
                     getGroupAddNovoGuia().setVisible(true);
 
-                    btnConfirmar.setOnMouseClicked(event -> {
-                        adicionarGuia();
-                    });
+                    btnConfirmar.setOnMouseClicked(event -> adicionarGuia());
 
                 } else if(userData.equals("usuario")){
                     getGroupAddNovaVisita().setVisible(false);
                     getGroupAddNovoUsuario().setVisible(true);
                     getGroupAddNovoGuia().setVisible(false);
 
-                    btnConfirmar.setOnMouseClicked(event -> {
-                        adicionarUsuario();
-                    });
+                    btnConfirmar.setOnMouseClicked(event -> adicionarUsuario());
 
                 } else paneCriarNovo.setDisable(true);
             }

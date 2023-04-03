@@ -20,9 +20,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario, Long>
             query.setParameter("login", login); // setando o parametro pra query
             return query.getSingleResult();
         } catch (Exception ex){
-            System.out.println("Usuario não encontrado!");
             return null;
         }
-
     }
 }

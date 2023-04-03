@@ -1,24 +1,26 @@
 package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 
-import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
-import br.edu.ifnmg.aplicacao_spring.entidades.Usuario;
+import br.edu.ifnmg.aplicacao_spring.entidades.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
 @FxmlView("viewAddNew.fxml")
 public class AddNewController implements Initializable{
-
+    @FXML
+    private ComboBox<Atrativo> boxAddAtrativoVisita;
+    @FXML
+    private ComboBox<Guia> boxAddGuiaVisita;
     @FXML
     private Button btnCancelar;
     @FXML
@@ -42,6 +44,19 @@ public class AddNewController implements Initializable{
     @FXML
     private TextField fieldAddSenhaUser;
 
+    @FXML
+    public Group groupAddNovaVisita;
+    @FXML
+    private TextField fieldAddNomeVisita;
+    @FXML
+    private TextField fieldAddTelVisita;
+    @FXML
+    private TextField fieldAddCPFVisita;
+    @FXML
+    private TextField fieldAddDataVisita;
+    @FXML
+    private TextField fieldAddEmailVisita;
+
     public Group getGroupAddNovaVisita() {
         return this.groupAddNovaVisita;
     }
@@ -53,21 +68,6 @@ public class AddNewController implements Initializable{
     public Group getGroupAddNovoUsuario() {
         return this.groupAddNovoUsuario;
     }
-
-    @FXML
-    public Group groupAddNovaVisita;
-    @FXML
-    private TextField fieldAddNomeVisita;
-    @FXML
-    private TextField fieldAddTelVisita;
-    @FXML
-    private TextField fieldAddAtrativoVisita;
-    @FXML
-    private TextField fieldAddCPFVisita;
-    @FXML
-    private TextField fieldAddDataVisita;
-    @FXML
-    private TextField fieldAddGuiaVisita;
 
     private void adicionarGuia(){
         Guia guia = new Guia();
@@ -120,9 +120,47 @@ public class AddNewController implements Initializable{
         }
     }
 
+    private void adicionarVisita(){
+        ResponsavelGrupo dadosResponsavel = new ResponsavelGrupo();
+        Visita dadosVisita = new Visita();
+
+        if (MainController.responsavelRepository.buscaPorCPF(fieldAddCPFVisita.getText()) == null) {
+            dadosResponsavel.setCpf(fieldAddCPFVisita.getText());
+            dadosResponsavel.setNome(fieldAddNomeVisita.getText());
+            dadosResponsavel.setEmail(fieldAddEmailVisita.getText());
+            dadosResponsavel.setTelefone(fieldAddTelVisita.getText());
+
+            try {
+                // salvando no BD
+                MainController.responsavelRepository.salvar(dadosResponsavel);
+                // limpando campos
+                clear();
+                // sucesso
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cadastrado com sucesso!", ButtonType.FINISH);
+                alert.showAndWait();
+                AplicacaoJavaFX.carregarTela("main");
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.FINISH);
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "CPF já cadastrado no sistema!", ButtonType.CLOSE);
+            alert.showAndWait();
+        }
+    }
+
+    private void carregarBox() {
+        ObservableList<Guia> obsListaGuias = FXCollections.observableArrayList(MainController.guiaRepository.buscarTodos());
+        boxAddGuiaVisita.setItems(obsListaGuias);
+        ObservableList<Atrativo> obsListaAtrativos = FXCollections.observableArrayList(MainController.atrativoRepository.buscarTodos());
+        boxAddAtrativoVisita.setItems(obsListaAtrativos);
+    }
+
     void clear(){
         MainController.limparCampos(new TextField[]
-                {fieldNomeGuia, fieldTelGuia, fieldEmailGuia, fieldAddLoginUser, fieldAddSenhaUser});
+                {fieldNomeGuia, fieldTelGuia, fieldEmailGuia,
+                        fieldAddLoginUser, fieldAddSenhaUser,
+                        fieldAddCPFVisita,fieldAddNomeVisita,fieldAddEmailVisita,fieldAddTelVisita});
     }
 
     @FXML
@@ -140,7 +178,9 @@ public class AddNewController implements Initializable{
                     getGroupAddNovaVisita().setVisible(true);
                     getGroupAddNovoUsuario().setVisible(false);
                     getGroupAddNovoGuia().setVisible(false);
+                    carregarBox();
 
+                    btnConfirmar.setOnMouseClicked(event -> adicionarVisita());
 
                 } else if (userData.equals("guia")) {
                     getGroupAddNovaVisita().setVisible(false);

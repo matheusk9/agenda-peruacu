@@ -16,8 +16,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Component
-@FxmlView("viewAdicionarGuia.fxml")
-public class AdicionarGuiaController implements Initializable{
+@FxmlView("viewAddNew.fxml")
+public class AddNewController implements Initializable{
 
     @FXML
     private Button btnCancelar;
@@ -133,7 +133,7 @@ public class AdicionarGuiaController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         AplicacaoJavaFX.addOnChangeScreenListener((newScreen, userData) -> {
-            if(newScreen.equals("addGuia")){
+            if(newScreen.equals("addNew")){
                 if(userData.equals("visita")){
                     getGroupAddNovaVisita().setVisible(true);
                     getGroupAddNovoUsuario().setVisible(false);

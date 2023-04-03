@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,7 +24,7 @@
 <AnchorPane prefHeight="351.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.LoginController">
    <TextField fx:id="fieldLogin" accessibleRole="TEXT" layoutX="84.0" layoutY="139.0" prefHeight="25.0" prefWidth="209.0" promptText="Usuário">
       <effect>
-         <DropShadow />
+         <InnerShadow />
       </effect></TextField>
    <Button fx:id="btnLogin" layoutX="83.0" layoutY="244.0" mnemonicParsing="false" onAction="#autenticar" prefHeight="31.0" prefWidth="209.0" stylesheets="@css/stylling.css" text="Entrar" textFill="WHITE">
       <effect>
@@ -57,6 +58,6 @@
       </children></Pane>
    <TextField fx:id="fieldPassword" accessibleRole="PASSWORD_FIELD" layoutX="84.0" layoutY="190.0" prefHeight="25.0" prefWidth="209.0" promptText="Senha">
       <effect>
-         <DropShadow />
+         <InnerShadow />
       </effect></TextField>
 </AnchorPane>

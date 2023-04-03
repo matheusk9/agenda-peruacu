@@ -7,7 +7,6 @@ import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -128,24 +127,29 @@ public class MainController implements Initializable {
 
         btnAdicionarNovo.setOnMouseClicked(event -> {
             AplicacaoJavaFX.carregarTela("addNew","visita");
-
         });
 
-        btnAdicionarGuia.setOnMouseClicked(event -> {
-            AplicacaoJavaFX.carregarTela("addNew", "guia");
 
-        });
 
-        btnAdicionarAdm.setOnMouseClicked(event -> {
-            AplicacaoJavaFX.carregarTela("addNew", "usuario");
-        });
 
 
     }
 
-    private ObservableList<Guia> listarTabelaGuia(){
-        //retorna uma ObservableList do BD através de um casting feito com o FXCollections
-        return FXCollections.observableArrayList(guiaRepository.buscarTodos());
+    private ObservableList<?> listarTabela(String tabela){
+        switch (tabela) {
+            case "guia":
+                return FXCollections.observableArrayList(guiaRepository.buscarTodos());
+            case "usuario":
+                return FXCollections.observableArrayList(usuarioRepository.buscarTodos());
+            case "visita":
+                return FXCollections.observableArrayList(visitaRepository.buscarTodos());
+            default:
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Carregar tabela");
+                alert.setHeaderText("Não foi possível carregar a tabela. Tente novamente mais tarde!");
+                alert.showAndWait();
+                return null;
+        }
     }
     @FXML
     private void atualizarTabelaGuias(){
@@ -153,7 +157,16 @@ public class MainController implements Initializable {
         tcNomeGuia.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tcTelefoneGuia.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         tcEmailGuia.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbViewGuias.setItems(listarTabelaGuia());
+        tbViewGuias.setItems((ObservableList<Guia>) listarTabela("guia"));
+    }
+
+    @FXML
+    private void atualizarTabelaUsuario(){
+        tcIDUsuario.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcLoginUsuario.setCellValueFactory(new PropertyValueFactory<>("login"));
+        tcSenhaUsuario.setCellValueFactory(new PropertyValueFactory<>("password"));
+        tcDateCreateUsuario.setCellValueFactory(new PropertyValueFactory<>("dateCreate"));
+        tbViewUsuario.setItems((ObservableList<Usuario>) listarTabela("usuario"));
     }
 
 
@@ -166,6 +179,7 @@ public class MainController implements Initializable {
                 abaGuias.setDisable(false);
                 abaUsuarios.setDisable(false);
                 atualizarTabelaGuias();
+                atualizarTabelaUsuario();
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -188,6 +202,9 @@ public class MainController implements Initializable {
         anchorPaneEdit.setVisible(false);
         detailsUsers.setVisible(false);
         detailsGuias.setVisible(true);
+
+        //Insert
+        btnAdicionarGuia.setOnMouseClicked(event -> AplicacaoJavaFX.carregarTela("addNew", "guia"));
 
         //refresh
         iconRefresh.setOnMouseClicked(event -> atualizarTabelaGuias());
@@ -216,6 +233,7 @@ public class MainController implements Initializable {
                 guiaRepository.atualizar(editarGuia);
                 atualizarTabelaGuias();
                 anchorPaneEdit.setVisible(false);
+                tbViewGuias.refresh();
             });
         });
     }
@@ -227,12 +245,11 @@ public class MainController implements Initializable {
         detailsGuias.setVisible(false);
         detailsUsers.setVisible(true);
 
-
+        //insert
+        btnAdicionarAdm.setOnMouseClicked(event -> AplicacaoJavaFX.carregarTela("addNew", "usuario"));
 
         //refresh
-        iconRefresh.setOnMouseClicked(event -> {
-
-        });
+        iconRefresh.setOnMouseClicked(event -> atualizarTabelaUsuario());
 
         // Edit
         tbViewUsuario.setOnMouseClicked(event -> {
@@ -253,8 +270,10 @@ public class MainController implements Initializable {
 
                 editarUsuario.setLogin(fieldEditLoginUser.getText());
                 editarUsuario.setPassword(fieldEditSenhaUser.getText());
-                usuarioRepository.salvar(usuarioSelecionado);
+                usuarioRepository.atualizar(editarUsuario);
+                atualizarTabelaUsuario();
                 anchorPaneEdit.setVisible(false);
+                tbViewUsuario.refresh();
             });
         });
     }

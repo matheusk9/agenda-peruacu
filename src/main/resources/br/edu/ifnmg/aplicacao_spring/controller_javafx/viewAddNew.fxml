@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneCriarNovo" prefHeight="351.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.AdicionarGuiaController">
+<AnchorPane fx:id="paneCriarNovo" prefHeight="351.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifnmg.aplicacao_spring.controller_javafx.AddNewController">
    <Button fx:id="btnConfirmar" layoutX="92.0" layoutY="279.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: green;" stylesheets="@css/stylling.css" text="Confirmar" textAlignment="CENTER" textFill="WHITE">
       <font>
          <Font name="System Bold" size="12.0" />

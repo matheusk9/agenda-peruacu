@@ -3,6 +3,8 @@ package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
 import br.edu.ifnmg.aplicacao_spring.entidades.Usuario;
 import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
+import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
+import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -105,11 +107,15 @@ public class MainController implements Initializable {
     private TableColumn<?, ?> tcGuia;
 
     protected static GuiaDAO guiaRepository;
+    protected static UsuarioDAO usuarioRepository;
+    protected static ResponsavelGrupoDAO visitaRepository;
 
-    public MainController( GuiaDAO guiaRepository) {
+
+    public MainController(GuiaDAO guiaRepository, UsuarioDAO usuarioRepository, ResponsavelGrupoDAO visitaRepository) {
         MainController.guiaRepository = guiaRepository;
+        MainController.usuarioRepository = usuarioRepository;
+        MainController.visitaRepository = visitaRepository;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,17 +126,21 @@ public class MainController implements Initializable {
         iconEdit.setOnMouseClicked(event -> anchorPaneEdit.setVisible(!anchorPaneEdit.isVisible()));
         btnCancelar.setOnMouseClicked(event -> anchorPaneEdit.setVisible(false));
 
-    }
+        btnAdicionarNovo.setOnMouseClicked(event -> {
+            AplicacaoJavaFX.carregarTela("addNew","visita");
 
-    @FXML
-    private void adicionarNovoAdm(ActionEvent event) {
-    }
+        });
+
+        btnAdicionarGuia.setOnMouseClicked(event -> {
+            AplicacaoJavaFX.carregarTela("addNew", "guia");
+
+        });
+
+        btnAdicionarAdm.setOnMouseClicked(event -> {
+            AplicacaoJavaFX.carregarTela("addNew", "usuario");
+        });
 
 
-    // --- CRUD GUIAS ---
-    @FXML
-    private void adicionarNovosGuias(ActionEvent event) {
-        AplicacaoJavaFX.carregarTela("addGuia");
     }
 
     private ObservableList<Guia> listarTabelaGuia(){
@@ -146,9 +156,6 @@ public class MainController implements Initializable {
         tbViewGuias.setItems(listarTabelaGuia());
     }
 
-    @FXML
-    private void agendarNovaVisita(ActionEvent event) {
-    }
 
     // --- PAINEL DE CONTROLE ---
     @FXML
@@ -220,15 +227,38 @@ public class MainController implements Initializable {
         detailsGuias.setVisible(false);
         detailsUsers.setVisible(true);
 
-        iconDelete.setOnMouseClicked(event -> {
+
+
+        //refresh
+        iconRefresh.setOnMouseClicked(event -> {
 
         });
 
-        iconRefresh.setOnMouseClicked(event -> {});
+        // Edit
+        tbViewUsuario.setOnMouseClicked(event -> {
+            int index = tbViewUsuario.getSelectionModel().getSelectedIndex();
+            Usuario usuarioSelecionado = tbViewUsuario.getItems().get(index);
+            fieldEditLoginUser.setText(usuarioSelecionado.getLogin());
+            fieldEditSenhaUser.setText(usuarioSelecionado.getPassword());
+
+            //delete
+            iconDelete.setOnMouseClicked(event0 -> {
+                usuarioRepository.excluir(usuarioRepository.buscaPorId(usuarioSelecionado.getId()));
+                tbViewUsuario.getItems().remove(index);
+            });
+
+            //update
+            btnAtualizar.setOnMouseClicked(event1 -> {
+                Usuario editarUsuario = usuarioRepository.buscaPorId(usuarioSelecionado.getId());
+
+                editarUsuario.setLogin(fieldEditLoginUser.getText());
+                editarUsuario.setPassword(fieldEditSenhaUser.getText());
+                usuarioRepository.salvar(usuarioSelecionado);
+                anchorPaneEdit.setVisible(false);
+            });
+        });
     }
 
     // --- ABA AGENDAMENTO ---
-
-
 
 }

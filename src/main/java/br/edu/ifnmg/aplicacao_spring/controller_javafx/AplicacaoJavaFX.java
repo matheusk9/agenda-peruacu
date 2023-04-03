@@ -52,7 +52,7 @@ public class AplicacaoJavaFX extends Application {
         Scene scene = new Scene(root);
         mainScreen = fxWeaver.loadView(MainController.class);
         mainScene = new Scene(mainScreen);
-        addGuiaScreen = fxWeaver.loadView(AdicionarGuiaController.class);
+        addGuiaScreen = fxWeaver.loadView(AddNewController.class);
         guiaScene = new Scene(addGuiaScreen);
 
         primaryStage.setScene(scene);
@@ -65,9 +65,9 @@ public class AplicacaoJavaFX extends Application {
                 stage.setScene(mainScene);
                 notifyAllListeners("main", nomeAba);
                 break;
-            case "addGuia":
+            case "addNew":
                 stage.setScene(guiaScene);
-                notifyAllListeners("addGuia", nomeAba);
+                notifyAllListeners("addNew", nomeAba);
         }
     }
 

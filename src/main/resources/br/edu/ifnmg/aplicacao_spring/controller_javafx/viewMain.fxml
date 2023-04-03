@@ -121,7 +121,7 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarNovo" mnemonicParsing="false" onAction="#agendarNovaVisita" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                          <Button fx:id="btnAdicionarNovo" mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
                                              <effect>
                                                 <DropShadow />
                                              </effect></Button>
@@ -167,7 +167,7 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarGuia" mnemonicParsing="false" onAction="#adicionarNovosGuias" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                          <Button fx:id="btnAdicionarGuia" mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
                                              <effect>
                                                 <DropShadow />
                                              </effect></Button>
@@ -211,7 +211,7 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <Button fx:id="btnAdicionarAdm" mnemonicParsing="false" onAction="#adicionarNovoAdm" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
+                                          <Button fx:id="btnAdicionarAdm" mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" styleClass="button2" stylesheets="@css/stylling.css" text="Adicionar novo" textFill="#8392aa">
                                              <effect>
                                                 <DropShadow />
                                              </effect></Button>

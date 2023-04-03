@@ -2,6 +2,7 @@ package br.edu.ifnmg.aplicacao_spring.controller_javafx;
 
 import br.edu.ifnmg.aplicacao_spring.entidades.Guia;
 import br.edu.ifnmg.aplicacao_spring.entidades.Usuario;
+import br.edu.ifnmg.aplicacao_spring.servicos.AtrativoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.GuiaDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.ResponsavelGrupoDAO;
 import br.edu.ifnmg.aplicacao_spring.servicos.UsuarioDAO;
@@ -105,12 +106,16 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<?, ?> tcGuia;
 
+    protected static ResponsavelGrupoDAO responsavelRepository;
+    protected static AtrativoDAO atrativoRepository;
     protected static GuiaDAO guiaRepository;
     protected static UsuarioDAO usuarioRepository;
     protected static ResponsavelGrupoDAO visitaRepository;
 
 
-    public MainController(GuiaDAO guiaRepository, UsuarioDAO usuarioRepository, ResponsavelGrupoDAO visitaRepository) {
+    public MainController(ResponsavelGrupoDAO responsavelRepository,AtrativoDAO atrativoRepository,GuiaDAO guiaRepository, UsuarioDAO usuarioRepository, ResponsavelGrupoDAO visitaRepository) {
+        MainController.responsavelRepository = responsavelRepository;
+        MainController.atrativoRepository = atrativoRepository;
         MainController.guiaRepository = guiaRepository;
         MainController.usuarioRepository = usuarioRepository;
         MainController.visitaRepository = visitaRepository;

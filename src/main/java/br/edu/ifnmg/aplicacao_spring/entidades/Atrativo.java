@@ -28,6 +28,6 @@ public class Atrativo {
 
     @Override
     public String toString() {
-        return "nome = " + nome.getNome();
+        return nome.getNome();
     }
 }
